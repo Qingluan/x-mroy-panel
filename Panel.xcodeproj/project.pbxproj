@@ -14,6 +14,10 @@
 		21F6200F223A40B1008A641B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F6200D223A40B1008A641B /* Main.storyboard */; };
 		21F6201B223A40B1008A641B /* PanelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F6201A223A40B1008A641B /* PanelTests.swift */; };
 		21F62026223A40B1008A641B /* PanelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F62025223A40B1008A641B /* PanelUITests.swift */; };
+		21F62037223A420C008A641B /* PopOverConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F62035223A420C008A641B /* PopOverConfig.swift */; };
+		21F62038223A420C008A641B /* PopOverConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F62036223A420C008A641B /* PopOverConfig.xib */; };
+		21F6203A223A43AE008A641B /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F62039223A43AE008A641B /* EventMonitor.swift */; };
+		21F6203C223A4D09008A641B /* ConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F6203B223A4D09008A641B /* ConfigData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,11 @@
 		21F62021223A40B1008A641B /* PanelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PanelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F62025223A40B1008A641B /* PanelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelUITests.swift; sourceTree = "<group>"; };
 		21F62027223A40B1008A641B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21F62035223A420C008A641B /* PopOverConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverConfig.swift; sourceTree = "<group>"; };
+		21F62036223A420C008A641B /* PopOverConfig.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopOverConfig.xib; sourceTree = "<group>"; };
+		21F62039223A43AE008A641B /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		21F6203B223A4D09008A641B /* ConfigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigData.swift; sourceTree = "<group>"; };
+		21F6203E223A6BA2008A641B /* CocoaMondoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaMondoKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +91,7 @@
 				21F62019223A40B1008A641B /* PanelTests */,
 				21F62024223A40B1008A641B /* PanelUITests */,
 				21F62002223A40B0008A641B /* Products */,
+				21F6203D223A6BA1008A641B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,12 +109,16 @@
 			isa = PBXGroup;
 			children = (
 				21F62004223A40B0008A641B /* AppDelegate.swift */,
+				21F62035223A420C008A641B /* PopOverConfig.swift */,
+				21F62036223A420C008A641B /* PopOverConfig.xib */,
 				21F62006223A40B0008A641B /* ViewController.swift */,
 				21F6200B223A40B1008A641B /* Assets.xcassets */,
+				21F62039223A43AE008A641B /* EventMonitor.swift */,
 				21F6200D223A40B1008A641B /* Main.storyboard */,
 				21F62010223A40B1008A641B /* Info.plist */,
 				21F62011223A40B1008A641B /* Panel.entitlements */,
 				21F62008223A40B0008A641B /* Panel.xcdatamodeld */,
+				21F6203B223A4D09008A641B /* ConfigData.swift */,
 			);
 			path = Panel;
 			sourceTree = "<group>";
@@ -125,6 +139,14 @@
 				21F62027223A40B1008A641B /* Info.plist */,
 			);
 			path = PanelUITests;
+			sourceTree = "<group>";
+		};
+		21F6203D223A6BA1008A641B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21F6203E223A6BA2008A641B /* CocoaMondoKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21F62038223A420C008A641B /* PopOverConfig.xib in Resources */,
 				21F6200C223A40B1008A641B /* Assets.xcassets in Resources */,
 				21F6200F223A40B1008A641B /* Main.storyboard in Resources */,
 			);
@@ -258,8 +281,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F62007223A40B0008A641B /* ViewController.swift in Sources */,
+				21F6203A223A43AE008A641B /* EventMonitor.swift in Sources */,
 				21F62005223A40B0008A641B /* AppDelegate.swift in Sources */,
+				21F6203C223A4D09008A641B /* ConfigData.swift in Sources */,
 				21F6200A223A40B0008A641B /* Panel.xcdatamodeld in Sources */,
+				21F62037223A420C008A641B /* PopOverConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +454,10 @@
 				CODE_SIGN_ENTITLEMENTS = Panel/Panel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Panel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -446,6 +476,10 @@
 				CODE_SIGN_ENTITLEMENTS = Panel/Panel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Panel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

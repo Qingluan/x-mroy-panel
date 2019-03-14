@@ -11,10 +11,27 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    let popover = NSPopover()
+    var eventMonitor: EventMonitor?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        if let button = statusItem.button {
+            button.image = NSImage(named: "PeopleIcon")
+            button.action = #selector(self.togglePopover(sender:))
+            
+        }
+        popover.contentViewController = PopOverConfig(nibName: "PopOverConfig", bundle: nil)
+        
+        eventMonitor = EventMonitor(mask:  [NSEvent.EventTypeMask.leftMouseDown, NSEvent.EventTypeMask.rightMouseDown]) {
+            [unowned self] event in
+            
+            if self.popover.isShown {
+                self.closePopover(sender: event)
+            }
+        }
+        eventMonitor?.start()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -116,6 +133,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         // If we got here, it is time to quit.
         return .terminateNow
+    }
+    
+    
+    
+    @objc  func togglePopover(sender: AnyObject?) {
+        if popover.isShown {
+            closePopover(sender: sender)
+        } else {
+            showPopover(sender: sender)
+        }
+    }
+    
+    @objc func showPopover(sender: AnyObject?) {
+        if let button = statusItem.button {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+        }
+    }
+    
+    @objc func closePopover(sender: AnyObject?) {
+        popover.performClose(sender)
+    }
+    
+    
+    @objc func printQuote(sender: AnyObject) {
+        let quoteText = "Never put off until tomorrow what you can do the day after tomorrow."
+        let quoteAuthor = "Mark Twain"
+        
+        print("\(quoteText) — \(quoteAuthor)")
     }
 
 }
