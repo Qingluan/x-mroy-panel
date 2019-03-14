@@ -11,7 +11,8 @@ import Cocoa
 class PopOverConfig: NSViewController{
     
     var ta_ = [Command]()
-    
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+//    let popover = NSPopover()
     
     @IBOutlet weak var tableView:NSTableView!
     
@@ -30,6 +31,23 @@ class PopOverConfig: NSViewController{
         self.tableView.dataSource = self
         
     
+    }
+    
+    @IBAction func toConfigView(any sender: Any) {
+        print("do some ?")
+        var appDelegate: AppDelegate {
+            return NSApplication.shared.delegate as! AppDelegate
+        }
+//        popover.close()
+//        dismiss(self)
+        
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let vc:ViewController = storyboard.instantiateController(withIdentifier: "viewController") as! ViewController
+        appDelegate.closePopover(sender: sender as AnyObject)
+        appDelegate.popover.contentViewController = vc
+        appDelegate.showPopover(sender: sender as AnyObject)
+        
+        
     }
     
 

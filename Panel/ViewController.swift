@@ -40,6 +40,23 @@ class ViewController: NSViewController {
         
     }
     
+    @IBAction func toAllCmdsView(_ sender: Any) {
+        
+        print("do some ?")
+        var appDelegate: AppDelegate {
+            return NSApplication.shared.delegate as! AppDelegate
+        }
+        //        popover.close()
+        //        dismiss(self)
+        
+        
+        let vc = PopOverConfig(nibName: "PopOverConfig", bundle: nil)
+        appDelegate.closePopover(sender: sender as AnyObject)
+        appDelegate.popover.contentViewController = vc
+        appDelegate.showPopover(sender: sender as AnyObject)
+        
+        
+    }
     @IBAction func if_cmd_exist(_ sender: Any) {
         if cmdNameInput.stringValue.count > 2{
             if Command.containCmd(name: cmdNameInput.stringValue){
