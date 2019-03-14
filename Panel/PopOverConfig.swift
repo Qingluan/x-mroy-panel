@@ -25,7 +25,7 @@ class PopOverConfig: NSViewController{
 //        department1.comands.append(account1)
 //        department1.comands.append(account2)
 //        department2.comands.append(account2)
-        self.ta_ = Command.fromJsonFile(path: "/tmp/panel.json")
+        self.ta_ = Command.load()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         

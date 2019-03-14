@@ -27,40 +27,100 @@ class Command {
         self.output = "/tmp/PanelLogs-\(name).log"
         
     }
+    func toDictionary() -> NSDictionary {
+        let dictionary: NSDictionary = [
+            "cmd" : self.cmd,
+            "output" : self.output
+        ]
+        return dictionary
+    }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        var new_cmds = [String]()
+        if let cmds:[String] = defaults.stringArray(forKey: "all_cmds"){
+            if cmds.contains(self.name){
+                new_cmds.append(contentsOf: cmds)
+            }else{
+                new_cmds.append(self.name)
+            }
+        }else{
+            new_cmds.append(self.name)
+        }
+        
+        defaults.set(new_cmds, forKey:"all_cmds")
+        defaults.set( self.toDictionary(), forKey: self.name)
+    }
+    
+    class func containCmd(name:String) -> Bool{
+        let defaults = UserDefaults.standard
+        
+        if let cmds = defaults.stringArray(forKey: "all_cmds"){
+            if (cmds.contains(name)){
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    class func loadBy(name:String) -> Command? {
+        
+        let defaults = UserDefaults.standard
+        if Command.containCmd(name: name){
+            let d:Dictionary<String, String> = defaults.dictionary(forKey: name) as! Dictionary<String, String>
+            return Command(name:name, cmd:d["cmd"]!, output:d["output"]!)
+        }else{
+            return nil
+        }
+    }
+    
+    class func load() -> [Command] {
+        var cmds = [Command]()
+        let defaults = UserDefaults.standard
+        let all_cmds:[String] = defaults.stringArray(forKey: "all_cmds")!
+        for key in all_cmds{
+            let d:Dictionary<String, String> = defaults.dictionary(forKey: key) as! Dictionary<String, String>
+            cmds.append(Command(name:key, cmd:d["cmd"]!, output:d["output"]!))
+        }
+        return cmds
+        
+    }
     
     class func fromJsonFile(path:String) -> [Command]{
         var commands = [Command]()
-        print("to finding: \(path)")
-        if let path = Bundle.main.path(forResource: path, ofType: "json") {
-            print("find file parsing")
-            do {
-                let fileUrl = URL(fileURLWithPath: path)
-                let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
-//                let data = try? JSONSerialization.jsonObject(with: ddata)
-//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                print("to \(data)")
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let commandjsons = jsonResult as? Dictionary<String, AnyObject> {
-                    // do stuff
-                    for (comName,subJson) in commandjsons {
-                        // Do something you want
-                        print("find \(comName)")
+        do {
+            
+            let file = URL(fileURLWithPath: "panel.json")
+//                let file = Bundle.main.url(forResource: "panel",  withExtension: "json")
+                let data = try Data(contentsOf: file)
+//                let data = try Data(contentsOf: URL(fileURLWithPath: file), type
+            
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let object = json as? [String: Dictionary<String, Any>] {
+                    // json is a dictionary
+                    for (cmdName,subJson) in object{
+                        print("find \(cmdName)")
                         if let cmdStr = subJson["cmd"] {
-                            let cmdIn =  Command(name: comName, cmd:cmdStr as! String)
-                        
-                    
+                            let cmdIn =  Command(name: cmdName, cmd:cmdStr as! String)
+                            
                             if let val = subJson["output"] {
                                 cmdIn.output = val as! String
                             }
                             
                             commands.append(cmdIn)
                         }
+                        
                     }
+                
+                } else {
+                    print("JSON is invalid")
                 }
-            } catch let error {
-                // handle error
-                print(error.localizedDescription)
-            }
+//            } else {
+//                print("no file \(path)")
+//            }
+        } catch {
+            print(error.localizedDescription)
         }
         
         return commands
