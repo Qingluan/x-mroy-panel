@@ -31,6 +31,7 @@ class ViewController: NSViewController {
                 let command = Command(name:cmdNameInput.stringValue, cmd: cmdStringInput.stringValue)
                 command.save()
                 showLabel.stringValue = "cmd save success"
+                toAllCmdsView(self)
             }else{
                 showLabel.stringValue = "cmd input can not be empty at least > 8"
             }
@@ -43,17 +44,17 @@ class ViewController: NSViewController {
     @IBAction func toAllCmdsView(_ sender: Any) {
         
         print("do some ?")
-        var appDelegate: AppDelegate {
-            return NSApplication.shared.delegate as! AppDelegate
-        }
-        //        popover.close()
-        //        dismiss(self)
-        
-        
-        let vc = PopOverConfig(nibName: "PopOverConfig", bundle: nil)
-        appDelegate.closePopover(sender: sender as AnyObject)
-        appDelegate.popover.contentViewController = vc
-        appDelegate.showPopover(sender: sender as AnyObject)
+//        var appDelegate: AppDelegate {
+//            return NSApplication.shared.delegate as! AppDelegate
+//        }
+//        //        popover.close()
+//        //        dismiss(self)
+//        
+//        
+//        let vc = PopOverConfig(nibName: "PopOverConfig", bundle: nil)
+//        appDelegate.closePopover(sender: sender as AnyObject)
+//        appDelegate.popover.contentViewController = vc
+//        appDelegate.showPopover(sender: sender as AnyObject)
         
         
     }

@@ -43,6 +43,7 @@ class Command {
                 new_cmds.append(contentsOf: cmds)
             }else{
                 new_cmds.append(self.name)
+                new_cmds.append(contentsOf: cmds)
             }
         }else{
             new_cmds.append(self.name)
@@ -125,4 +126,6 @@ class Command {
         
         return commands
     }
+    
+    
 }
