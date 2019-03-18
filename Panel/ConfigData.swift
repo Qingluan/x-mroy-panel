@@ -39,8 +39,11 @@ class Command {
         let defaults = UserDefaults.standard
         var new_cmds = [String]()
         if let cmds:[String] = defaults.stringArray(forKey: "all_cmds"){
+            print("\(cmds)")
             if cmds.contains(self.name){
-                new_cmds.append(contentsOf: cmds)
+                for cname in cmds{
+                    new_cmds.append(cname)
+                }
             }else{
                 new_cmds.append(self.name)
             }
@@ -64,6 +67,14 @@ class Command {
         return false
     }
     
+    class func count() -> Int{
+        let defaults = UserDefaults.standard
+        if let all_cmds = defaults.stringArray(forKey: "all_cmds"){
+            return all_cmds.count
+        }
+        return 0
+    }
+ 
     class func loadBy(name:String) -> Command? {
         
         let defaults = UserDefaults.standard
@@ -78,10 +89,12 @@ class Command {
     class func load() -> [Command] {
         var cmds = [Command]()
         let defaults = UserDefaults.standard
-        let all_cmds:[String] = defaults.stringArray(forKey: "all_cmds")!
-        for key in all_cmds{
-            let d:Dictionary<String, String> = defaults.dictionary(forKey: key) as! Dictionary<String, String>
-            cmds.append(Command(name:key, cmd:d["cmd"]!, output:d["output"]!))
+        if let all_cmds = defaults.stringArray(forKey: "all_cmds"){
+            print("cmds : \(all_cmds)")
+            for key in all_cmds{
+                let d:Dictionary<String, String> = defaults.dictionary(forKey: key) as! Dictionary<String, String>
+                cmds.append(Command(name:key, cmd:d["cmd"]!, output:d["output"]!))
+            }
         }
         return cmds
         

@@ -26,7 +26,13 @@ class PopOverConfig: NSViewController{
 //        department1.comands.append(account1)
 //        department1.comands.append(account2)
 //        department2.comands.append(account2)
-        self.ta_ = Command.load()
+        let datas = Command.load()
+        if datas.isEmpty {
+            self.toConfigView(any: self)
+        }else{
+            self.ta_.append(contentsOf: datas)
+        }
+         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
