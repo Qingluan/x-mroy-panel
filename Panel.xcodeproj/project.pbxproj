@@ -26,6 +26,8 @@
 		327D867D223E9EAE00B93931 /* CommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D867C223E9EAE00B93931 /* CommandViewController.swift */; };
 		327D867F223E9FED00B93931 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D867E223E9FED00B93931 /* ShowViewController.swift */; };
 		327D8681223EA12900B93931 /* TestCmdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D8680223EA12900B93931 /* TestCmdController.swift */; };
+		327D8682224143CE00B93931 /* test_if_running.sh in Resources */ = {isa = PBXBuildFile; fileRef = 21F62040223F4E25008A641B /* test_if_running.sh */; };
+		327D8684224148D500B93931 /* test_if_running_and_kill.sh in Resources */ = {isa = PBXBuildFile; fileRef = 327D86832241488600B93931 /* test_if_running_and_kill.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,7 @@
 		327D867C223E9EAE00B93931 /* CommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewController.swift; sourceTree = "<group>"; };
 		327D867E223E9FED00B93931 /* ShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 		327D8680223EA12900B93931 /* TestCmdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCmdController.swift; sourceTree = "<group>"; };
+		327D86832241488600B93931 /* test_if_running_and_kill.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test_if_running_and_kill.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,7 @@
 				21F62004223A40B0008A641B /* AppDelegate.swift */,
 				21F62035223A420C008A641B /* PopOverConfig.swift */,
 				21F62040223F4E25008A641B /* test_if_running.sh */,
+				327D86832241488600B93931 /* test_if_running_and_kill.sh */,
 				327D8676223E06B700B93931 /* ShowCommandsViewController.swift */,
 				327D8677223E06B700B93931 /* ShowCommandsViewController.xib */,
 				21F62036223A420C008A641B /* PopOverConfig.xib */,
@@ -286,6 +290,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				327D8684224148D500B93931 /* test_if_running_and_kill.sh in Resources */,
+				327D8682224143CE00B93931 /* test_if_running.sh in Resources */,
 				21F62038223A420C008A641B /* PopOverConfig.xib in Resources */,
 				21F6200C223A40B1008A641B /* Assets.xcassets in Resources */,
 				327D8675223AB74400B93931 /* panel.json in Resources */,

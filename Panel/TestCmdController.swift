@@ -20,7 +20,10 @@ class TestCmdController: NSViewController,NSTextFieldDelegate {
     
     @IBAction func if_running(_ sender: Any) {
         let cmd = testCmdText.stringValue
-        if RunCommand(cmd: cmd).if_running(){
+//        if RunCommand(cmd: cmd).if_running(){
+//
+//        }
+        if RunCommand.testCmd(cmd: cmd){
             
         }
     }

@@ -33,18 +33,21 @@ class ShowCommandsViewController: NSViewController {
                 
             }
         }
-        
+//
     }
     
     @objc func tableViewDoubleAction() {
         let i = tableView.clickedRow
         let name = self.ta_[i].name
+        let cmd = self.ta_[i].cmd
+        
         self.ta_.remove(at: i)
         Command.removeByName(name: name)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            
-            
+        if RunCommand.testCmd(cmd: cmd, kill: true){
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+                
+            }
         }
         print("remove one")
     }
@@ -62,7 +65,7 @@ extension ShowCommandsViewController:NSTableViewDataSource, NSTableViewDelegate{
         let result:KSTableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "renderCell"), owner: self) as! KSTableCellView
         result.cmdName.stringValue = ta_[row].name
         DispatchQueue.global().async { [weak result, weak self] in
-            if RunCommand(cmd: (self?.ta_[row].cmd)!).if_running(){
+            if RunCommand.testCmd(cmd: (self?.ta_[row].cmd)! ){
                 let pstyle = NSMutableParagraphStyle()
                 pstyle.alignment = .center
                 result?.startBtn.attributedTitle = NSAttributedString(
@@ -102,17 +105,19 @@ class KSTableCellView: NSTableCellView {
         DispatchQueue.global().async { [weak self] in
             
             let cmd = self?.cmdString.stringValue
-            let r = RunCommand(cmd: cmd!)
-            if r.if_running(){
-                r.if_running(kill: true)
-                DispatchQueue.main.async {[weak self] in
-                    self?.startBtn.title = "X"
+            
+            if RunCommand.testCmd(cmd: cmd!){
+                if RunCommand.testCmd(cmd: cmd!, kill: true){
+                    DispatchQueue.main.async {[weak self] in
+                        self?.startBtn.title = "X"
+                    }
                 }
                 
             }else{
             
-                let r = RunCommand(cmd: cmd!)
-                r.run()
+                DispatchQueue.global().async {
+                    RunCommand(cmd: cmd!).run()
+                }
                 DispatchQueue.main.async {[weak self] in
                     let pstyle = NSMutableParagraphStyle()
                     pstyle.alignment = .center

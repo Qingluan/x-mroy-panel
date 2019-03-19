@@ -276,4 +276,42 @@ class RunCommand {
         let ss = String(data: from.fileHandleForReading.readDataToEndOfFile(), encoding: String.Encoding.utf8)
         print("\(pre):\(ss)")
     }
+
+    
+    
+    class func testCmd(cmd:String, kill:Bool = false) -> Bool{
+        let cmdargs = cmd.split(separator: " ")
+        var choice = "test_if_running"
+        var s = [String]()
+        
+        for c in cmdargs{
+            if c.starts(with: "-"){
+                continue
+            }
+            s.append(String(c))
+        }
+        if kill{
+            choice = "test_if_running_and_kill"
+        }
+        if let filepath = Bundle.main.path(forResource: choice, ofType: "sh"){
+            let process = Process()
+            process.launchPath = "/bin/bash"
+            process.environment = ProcessInfo.processInfo.environment
+            s.insert(filepath, at: 0)
+            print("run c: \(s)")
+            process.arguments = s
+            
+            let pipe = Pipe()
+            process.standardOutput = pipe
+            process.launch()
+            if let out = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: String.Encoding.utf8){
+                if out.count > 1{
+                    print("test res? : \(out)")
+                    return true
+                }
+            }
+            
+        }
+        return false
+    }
 }

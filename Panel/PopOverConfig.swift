@@ -13,7 +13,7 @@ class PopOverConfig: NSPageController, NSPageControllerDelegate{
     
 //    let popover = NSPopover()
     
-    var myViewArray = [ "test", "show", "config"]
+    var myViewArray = [ "show",  "config", "test"]
     
     override func viewDidLoad() {
         
