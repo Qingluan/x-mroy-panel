@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2161627722408B3C00065221 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2161627622408B3C00065221 /* Services.swift */; };
 		21F62005223A40B0008A641B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F62004223A40B0008A641B /* AppDelegate.swift */; };
 		21F62007223A40B0008A641B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F62006223A40B0008A641B /* ViewController.swift */; };
 		21F6200A223A40B0008A641B /* Panel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21F62008223A40B0008A641B /* Panel.xcdatamodeld */; };
@@ -19,6 +20,12 @@
 		21F6203A223A43AE008A641B /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F62039223A43AE008A641B /* EventMonitor.swift */; };
 		21F6203C223A4D09008A641B /* ConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F6203B223A4D09008A641B /* ConfigData.swift */; };
 		327D8675223AB74400B93931 /* panel.json in Resources */ = {isa = PBXBuildFile; fileRef = 327D8674223AB74400B93931 /* panel.json */; };
+		327D8678223E06B700B93931 /* ShowCommandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D8676223E06B700B93931 /* ShowCommandsViewController.swift */; };
+		327D8679223E06B700B93931 /* ShowCommandsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 327D8677223E06B700B93931 /* ShowCommandsViewController.xib */; };
+		327D867B223E934600B93931 /* RunCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D867A223E934600B93931 /* RunCommand.swift */; };
+		327D867D223E9EAE00B93931 /* CommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D867C223E9EAE00B93931 /* CommandViewController.swift */; };
+		327D867F223E9FED00B93931 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D867E223E9FED00B93931 /* ShowViewController.swift */; };
+		327D8681223EA12900B93931 /* TestCmdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327D8680223EA12900B93931 /* TestCmdController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2161627622408B3C00065221 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		21F62001223A40B0008A641B /* Panel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Panel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F62004223A40B0008A641B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21F62006223A40B0008A641B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +66,14 @@
 		21F62039223A43AE008A641B /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		21F6203B223A4D09008A641B /* ConfigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigData.swift; sourceTree = "<group>"; };
 		21F6203E223A6BA2008A641B /* CocoaMondoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaMondoKit.framework; sourceTree = "<group>"; };
+		21F62040223F4E25008A641B /* test_if_running.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test_if_running.sh; sourceTree = "<group>"; };
 		327D8674223AB74400B93931 /* panel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = panel.json; sourceTree = "<group>"; };
+		327D8676223E06B700B93931 /* ShowCommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCommandsViewController.swift; sourceTree = "<group>"; };
+		327D8677223E06B700B93931 /* ShowCommandsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowCommandsViewController.xib; sourceTree = "<group>"; };
+		327D867A223E934600B93931 /* RunCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCommand.swift; sourceTree = "<group>"; };
+		327D867C223E9EAE00B93931 /* CommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewController.swift; sourceTree = "<group>"; };
+		327D867E223E9FED00B93931 /* ShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
+		327D8680223EA12900B93931 /* TestCmdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCmdController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,15 +127,23 @@
 			children = (
 				21F62004223A40B0008A641B /* AppDelegate.swift */,
 				21F62035223A420C008A641B /* PopOverConfig.swift */,
+				21F62040223F4E25008A641B /* test_if_running.sh */,
+				327D8676223E06B700B93931 /* ShowCommandsViewController.swift */,
+				327D8677223E06B700B93931 /* ShowCommandsViewController.xib */,
 				21F62036223A420C008A641B /* PopOverConfig.xib */,
 				21F62006223A40B0008A641B /* ViewController.swift */,
 				21F6200B223A40B1008A641B /* Assets.xcassets */,
 				21F62039223A43AE008A641B /* EventMonitor.swift */,
 				21F6200D223A40B1008A641B /* Main.storyboard */,
+				327D8680223EA12900B93931 /* TestCmdController.swift */,
+				327D867E223E9FED00B93931 /* ShowViewController.swift */,
+				327D867C223E9EAE00B93931 /* CommandViewController.swift */,
 				21F62010223A40B1008A641B /* Info.plist */,
 				21F62011223A40B1008A641B /* Panel.entitlements */,
 				21F62008223A40B0008A641B /* Panel.xcdatamodeld */,
 				21F6203B223A4D09008A641B /* ConfigData.swift */,
+				327D867A223E934600B93931 /* RunCommand.swift */,
+				2161627622408B3C00065221 /* Services.swift */,
 				327D8674223AB74400B93931 /* panel.json */,
 			);
 			path = Panel;
@@ -162,6 +185,7 @@
 				21F61FFD223A40B0008A641B /* Sources */,
 				21F61FFE223A40B0008A641B /* Frameworks */,
 				21F61FFF223A40B0008A641B /* Resources */,
+				21F62041223F4F44008A641B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -179,6 +203,7 @@
 				21F62012223A40B1008A641B /* Sources */,
 				21F62013223A40B1008A641B /* Frameworks */,
 				21F62014223A40B1008A641B /* Resources */,
+				21F62043223F4FEC008A641B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -220,6 +245,11 @@
 				TargetAttributes = {
 					21F62000223A40B0008A641B = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					21F62015223A40B1008A641B = {
 						CreatedOnToolsVersion = 10.1;
@@ -260,6 +290,7 @@
 				21F6200C223A40B1008A641B /* Assets.xcassets in Resources */,
 				327D8675223AB74400B93931 /* panel.json in Resources */,
 				21F6200F223A40B1008A641B /* Main.storyboard in Resources */,
+				327D8679223E06B700B93931 /* ShowCommandsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,17 +310,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21F62041223F4F44008A641B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"start\"\n";
+		};
+		21F62043223F4FEC008A641B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho “ — — — — — — — — — — test run script started — — — — — — — — — — “\necho “ — — — — — — — — — — test run script stopped — — — — — — — — — — “\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		21F61FFD223A40B0008A641B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				327D8678223E06B700B93931 /* ShowCommandsViewController.swift in Sources */,
+				2161627722408B3C00065221 /* Services.swift in Sources */,
 				21F62007223A40B0008A641B /* ViewController.swift in Sources */,
 				21F6203A223A43AE008A641B /* EventMonitor.swift in Sources */,
+				327D8681223EA12900B93931 /* TestCmdController.swift in Sources */,
 				21F62005223A40B0008A641B /* AppDelegate.swift in Sources */,
 				21F6203C223A4D09008A641B /* ConfigData.swift in Sources */,
+				327D867F223E9FED00B93931 /* ShowViewController.swift in Sources */,
 				21F6200A223A40B0008A641B /* Panel.xcdatamodeld in Sources */,
 				21F62037223A420C008A641B /* PopOverConfig.swift in Sources */,
+				327D867D223E9EAE00B93931 /* CommandViewController.swift in Sources */,
+				327D867B223E934600B93931 /* RunCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,9 +529,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Panel/Panel.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QK666B475A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -469,6 +544,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Panel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -477,9 +553,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Panel/Panel.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QK666B475A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -491,6 +568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Panel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

@@ -8,13 +8,12 @@
 
 import Cocoa
 
-class PopOverConfig: NSViewController{
+class PopOverConfig: NSPageController, NSPageControllerDelegate{
     
-    var ta_ = [Command]()
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    
 //    let popover = NSPopover()
     
-    @IBOutlet weak var tableView:NSTableView!
+    var myViewArray = [ "test", "show", "config"]
     
     override func viewDidLoad() {
         
@@ -26,69 +25,44 @@ class PopOverConfig: NSViewController{
 //        department1.comands.append(account1)
 //        department1.comands.append(account2)
 //        department2.comands.append(account2)
-        let datas = Command.load()
-        if datas.isEmpty {
-            self.toConfigView(any: self)
-        }else{
-            self.ta_.append(contentsOf: datas)
+
+        delegate = self
+        self.arrangedObjects = myViewArray
+        self.transitionStyle = .horizontalStrip
+    
+    }
+    
+    func pageController(_ pageController: NSPageController, viewControllerForIdentifier identifier: String) -> NSViewController {
+        print("\(identifier) \(selectedIndex)")
+        switch identifier {
+            
+        case "show":
+            //            return NSStoryboard(name: "", bundle:nil).instantiateController(withIdentifier: "Page02") as! NSViewController
+            
+            return  ShowCommandsViewController(nibName: "ShowCommandsViewController", bundle: nil)
+        case "config":
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            let vc:ViewController = storyboard.instantiateController(withIdentifier: "viewController") as! ViewController
+            return vc
+        case "test":
+            return NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "commandViewController") as! NSViewController
+        //            return NSStoryboard(name: "Main", bundle:nil).instantiateController(withIdentifier: "viewController") as! NSViewController
+        default:
+            return self.storyboard?.instantiateController(withIdentifier: identifier) as! NSViewController
         }
-         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
-    
-    }
-    
-    @IBAction func toConfigView(any sender: Any) {
-        print("do some ?")
-        var appDelegate: AppDelegate {
-            return NSApplication.shared.delegate as! AppDelegate
-        }
-//        popover.close()
-//        dismiss(self)
-        
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let vc:ViewController = storyboard.instantiateController(withIdentifier: "viewController") as! ViewController
-        appDelegate.closePopover(sender: sender as AnyObject)
-        appDelegate.popover.contentViewController = vc
-        appDelegate.showPopover(sender: sender as AnyObject)
-        
         
     }
     
-
-}
-
-
-
-extension PopOverConfig:NSTableViewDataSource, NSTableViewDelegate{
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return ta_.count
+    
+    func pageController(_ pageController: NSPageController, identifierFor object: Any) -> String {
+        return String(describing: object)
+        
     }
+  
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
-        let result:KSTableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "renderCell"), owner: self) as! KSTableCellView
-        result.imgView.image = NSImage(named: "icon_dock_mul")
-        result.cmdName.stringValue = ta_[row].name
-        result.startBtn.stringValue = "Off"
-        result.startBtn.state = .off
-        result.cmdString.stringValue = ta_[row].cmd
-        return result;
+    
+    func pageControllerDidEndLiveTransition(_ pageController: NSPageController) {
+        self.completeTransition()
     }
-    
-    
-}
 
-    
-    
-    
-    
-
-class KSTableCellView: NSTableCellView {
-    
-    @IBOutlet weak var startBtn: NSButton!
-    @IBOutlet weak var imgView: NSImageView!
-    @IBOutlet weak var cmdName: NSTextField!
-    @IBOutlet weak var cmdString: NSTextField!
-    
 }

@@ -12,7 +12,7 @@ class Command {
     let name:String
     let cmd:String
     var output:String = "/tmp/panel.logs"
-
+    var if_running:Bool = false
     
     init (name:String, cmd:String, output:String){
         self.name = name
@@ -27,6 +27,16 @@ class Command {
         self.output = "/tmp/PanelLogs-\(name).log"
         
     }
+    
+    
+    func cmd_test(){
+        DispatchQueue.global().async { [weak self] in
+            if RunCommand(cmd: (self?.cmd)!).if_running(){
+               self?.if_running = true
+            }
+        }
+    }
+    
     func toDictionary() -> NSDictionary {
         let dictionary: NSDictionary = [
             "cmd" : self.cmd,
@@ -46,6 +56,7 @@ class Command {
                 }
             }else{
                 new_cmds.append(self.name)
+                new_cmds.append(contentsOf: cmds)
             }
         }else{
             new_cmds.append(self.name)
@@ -53,6 +64,23 @@ class Command {
         
         defaults.set(new_cmds, forKey:"all_cmds")
         defaults.set( self.toDictionary(), forKey: self.name)
+    }
+    
+    class func removeByName(name:String){
+        let defaults = UserDefaults.standard
+        if let cmds = defaults.stringArray(forKey: "all_cmds"){
+            if cmds.contains( name){
+                defaults.removeObject(forKey: name)
+                var s = [String]()
+                for i in cmds{
+                    if i != name{
+                        s.append(i)
+                    }
+                }
+                defaults.set(s, forKey:"all_cmds")
+            }
+            
+        }
     }
     
     class func containCmd(name:String) -> Bool{
@@ -138,4 +166,6 @@ class Command {
         
         return commands
     }
+    
+    
 }

@@ -30,8 +30,8 @@ class ViewController: NSViewController {
             if cmdStringInput.stringValue.count > 8{
                 let command = Command(name:cmdNameInput.stringValue, cmd: cmdStringInput.stringValue)
                 command.save()
-                showLabel.stringValue = "cmd:\(cmdNameInput.stringValue) save success"
-                cmdStringInput.stringValue = ""
+
+                showLabel.stringValue = "cmd save success"
             }else{
                 showLabel.stringValue = "cmd input can not be empty at least > 8"
             }
@@ -41,25 +41,6 @@ class ViewController: NSViewController {
         
     }
     
-    @IBAction func toAllCmdsView(_ sender: Any) {
-        if Command.count() > 0{
-            print("do some ?")
-            var appDelegate: AppDelegate {
-                return NSApplication.shared.delegate as! AppDelegate
-            }
-            //        popover.close()
-            //        dismiss(self)
-            
-            
-            let vc = PopOverConfig(nibName: "PopOverConfig", bundle: nil)
-            appDelegate.closePopover(sender: sender as AnyObject)
-            appDelegate.popover.contentViewController = vc
-            appDelegate.showPopover(sender: sender as AnyObject)
-            
-        }
-        
-        
-    }
     @IBAction func if_cmd_exist(_ sender: Any) {
         if cmdNameInput.stringValue.count > 2{
             if Command.containCmd(name: cmdNameInput.stringValue){
