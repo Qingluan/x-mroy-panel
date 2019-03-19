@@ -11,7 +11,7 @@ import Cocoa
 class ShowCommandsViewController: NSViewController {
     var ta_ = [Command]()
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-    var updateService = Services(schedulerName: "updateCmds", reapeat: 3)
+    var updateService = Services(schedulerName: "updateCmds", reapeat: 10)
     @IBOutlet weak var tableView:NSTableView!
     
     override func viewDidLoad() {
@@ -61,17 +61,20 @@ extension ShowCommandsViewController:NSTableViewDataSource, NSTableViewDelegate{
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?{
         let result:KSTableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "renderCell"), owner: self) as! KSTableCellView
         result.cmdName.stringValue = ta_[row].name
-        if RunCommand(cmd: ta_[row].cmd).if_running(){
-            let pstyle = NSMutableParagraphStyle()
-            pstyle.alignment = .center
-            result.startBtn.attributedTitle = NSAttributedString(
-                string: "✓",
-                attributes: [ NSAttributedString.Key.foregroundColor : NSColor.green, NSAttributedString.Key.paragraphStyle : pstyle ])
+        DispatchQueue.global().async { [weak result, weak self] in
+            if RunCommand(cmd: (self?.ta_[row].cmd)!).if_running(){
+                let pstyle = NSMutableParagraphStyle()
+                pstyle.alignment = .center
+                result?.startBtn.attributedTitle = NSAttributedString(
+                    string: "✓",
+                    attributes: [ NSAttributedString.Key.foregroundColor : NSColor.green, NSAttributedString.Key.paragraphStyle : pstyle ])
+                
+            }else{
+                result?.startBtn.title = "x"
+            }
             
-        }else{
-            result.startBtn.title = "x"
+
         }
-        
         result.cmdString.stringValue = ta_[row].cmd
         
         
@@ -95,28 +98,34 @@ class KSTableCellView: NSTableCellView {
     @IBOutlet weak var cmdName: NSTextField!
     @IBOutlet weak var cmdString: NSTextField!
     @IBAction func runOrOff(_ sender: Any) {
-        let cmd = self.cmdString.stringValue
-        let r = RunCommand(cmd: cmd)
-        if r.if_running(){
-            r.if_running(kill: true)
-            startBtn.title = "X"
+        
+        DispatchQueue.global().async { [weak self] in
             
-        }else{
-            
-            DispatchQueue.global().async {
-                let r = RunCommand(cmd: cmd)
-                r.run()
-            }
-            
+            let cmd = self?.cmdString.stringValue
+            let r = RunCommand(cmd: cmd!)
             if r.if_running(){
-                let pstyle = NSMutableParagraphStyle()
-                pstyle.alignment = .center
-                startBtn.attributedTitle = NSAttributedString(
-                    string: "✓",
-                    attributes: [ NSAttributedString.Key.foregroundColor : NSColor.green, NSAttributedString.Key.paragraphStyle : pstyle ])
+                r.if_running(kill: true)
+                DispatchQueue.main.async {[weak self] in
+                    self?.startBtn.title = "X"
+                }
+                
+            }else{
+            
+                let r = RunCommand(cmd: cmd!)
+                r.run()
+                DispatchQueue.main.async {[weak self] in
+                    let pstyle = NSMutableParagraphStyle()
+                    pstyle.alignment = .center
+                    self?.startBtn.attributedTitle = NSAttributedString(
+                        string: "✓",
+                        attributes: [ NSAttributedString.Key.foregroundColor : NSColor.green, NSAttributedString.Key.paragraphStyle : pstyle ])
+                }
+                
             }
+            
             
         }
+        
         
         
         

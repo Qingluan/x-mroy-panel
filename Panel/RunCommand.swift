@@ -53,7 +53,6 @@ final class Bash: CommandExecuting {
     private func execute(command: String, arguments: [String] = [])  -> String? {
         let process = Process()
         process.launchPath = command
-        print(command)
         
         process.arguments = arguments
         process.environment = ProcessInfo.processInfo.environment
@@ -253,15 +252,19 @@ class RunCommand {
             if kill{
                 if let _g = bash.ChainsPip(from: grepPip, cmd: "awk {print $2} "){
                     if let __g = bash.ChainsPip(from: _g, cmd: "xargs kill -9 "){
+                        if let outt = String(data: __g.fileHandleForReading.readDataToEndOfFile(), encoding: String.Encoding.utf8){
+                            print("test: \(outt)")
+                            return true
+                        }
+//                        showPipe(from: __g, pre: "[kill]")
                         
-                        showPipe(from: __g, pre: "[kill]")
-                        return true
                     }
                 }
                 
             }else{
-                if let _ = String(data: grepPip.fileHandleForReading.readDataToEndOfFile(), encoding: String.Encoding.utf8){
+                if let outt = String(data: grepPip.fileHandleForReading.readDataToEndOfFile(), encoding: String.Encoding.utf8){
     //                showPipe(from: _gpip, pre: "[grep]")
+                    
                     return true
                 }
             }
